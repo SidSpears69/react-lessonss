@@ -5,13 +5,13 @@ import React from 'react';
 
 const Dialogs = (props) => {
 
-    let newMessageElement = React.createRef();
-
-    let addMessage = () => {
-      let text = newMessageElement.current.value;
-      alert(text);
+    let onSendMessageClick = () => {
+        props.sendMessage()
     }
-
+    let onNewMessageChange = (evt) => {
+        let body = evt.target.value;
+        props.updateNewMessageBody(body);
+      }
     let DialogElements = props.state.dialogs.map(d => (<DialogItem key={d.id} name={d.name} id={d.id} />))
     let MessagesElements = props.state.messages.map(m => (<Message key={m.id} message={m.message} />))
     return (
@@ -20,9 +20,9 @@ const Dialogs = (props) => {
                 {DialogElements}
             </div>
             <div className={s.messages}>
-                {MessagesElements}
-                <div><textarea ref={newMessageElement}></textarea></div>
-                <div><button onClick={addMessage}>Add post</button></div>
+                <div>{MessagesElements}</div>
+                <div><textarea placeholder="Enter your message" value={props.state.newMessageBody} onChange={onNewMessageChange}></textarea></div>
+                <div><button onClick={onSendMessageClick}>Send</button></div>
             </div>
         </div>
     );
