@@ -4,6 +4,7 @@ import profilePhoto from "../../../assets/images/users.png";
 import ProfileStatus from './ProfileStatus';
 
 const ProfileInfo = (props) => {
+  debugger;
   if(!props.profile) {
     return <Preloader />
   }
@@ -13,7 +14,7 @@ const ProfileInfo = (props) => {
         <div className={s.descriptionBlock}>
           <div>
           <img src={props.profile.photos.large ? props.profile.photos.large : profilePhoto} alt="" />
-            <ProfileStatus status="Hello my Friends!!! aaaargh!!!"/>
+            <ProfileStatus status={props.status} updateStatus = {props.updateStatus}/>
             </div>
         </div>
       </div>
